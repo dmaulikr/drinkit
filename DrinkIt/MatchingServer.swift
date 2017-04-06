@@ -9,10 +9,16 @@
 import UIKit
 import MultipeerConnectivity
 
+protocol MatchingServerDelegate {
+    func matchingServer(server:MatchingServer,
+                        clientsDidChange clients:[MCPeerID])
+}
+
 class MatchingServer: MatchingHandler {
 
     var advertiser:MCNearbyServiceAdvertiser!
     var connectedClients = [MCPeerID]()
+    var delegate:MatchingServerDelegate?
 
     override init() {
         super.init()
@@ -46,6 +52,10 @@ extension MatchingServer: MCNearbyServiceAdvertiserDelegate {
         invitationHandler(true, session)
         
         connectedClients.append(peerID)
+        
+        DispatchQueue.main.async {
+            self.delegate?.matchingServer(server: self, clientsDidChange: self.connectedClients)
+        }
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser,

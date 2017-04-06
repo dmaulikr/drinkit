@@ -18,10 +18,7 @@ class JoinViewController: UIViewController {
         super.viewDidLoad()
         
         setupTableView()
-        
-        matchingClient.foundHostsDidChange = {
-            self.tableView.reloadData()
-        }
+        setupMatchingClient()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,6 +37,10 @@ class JoinViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
 
+    func setupMatchingClient() {
+        matchingClient.delegate = self
+    }
+    
     @IBAction func actionBack(_ sender: Any) {
         let _ = self.navigationController?.popViewController(animated: true)
     }
@@ -78,5 +79,23 @@ extension JoinViewController : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+}
+
+extension JoinViewController : MatchingClientDelegate {
+    func matchingClient(client:MatchingClient,
+                        hostsDidChange hosts:[MCPeerID]) {
+        tableView.reloadData()
+    }
+    func matchingClient(client:MatchingClient,
+                        shouldReplay inSeconds:(TimeInterval),
+                        withNumber number:(UInt)) {
+        
+    }
+    func matchingClientShouldStartGame(client:MatchingClient) {
+        performSegue(withIdentifier: "Play", sender: nil)
+    }
+    func matchingClientShouldEndGame(client:MatchingClient) {
+        
     }
 }

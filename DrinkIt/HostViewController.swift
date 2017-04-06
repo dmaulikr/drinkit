@@ -12,9 +12,12 @@ import MultipeerConnectivity
 class HostViewController: UIViewController {
     
     let matchingServer = MatchingServer()
-
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+        setupMatchingServer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,7 +36,20 @@ class HostViewController: UIViewController {
 
     @IBAction func actionStart(_ sender: Any) {
         matchingServer.startGame()
+        
+        performSegue(withIdentifier: "Play", sender: nil)
     }
+    
+    func setupMatchingServer() {
+        matchingServer.delegate = self
+    }
+    
+    func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    }
+
     /*
     // MARK: - Navigation
 
@@ -46,3 +62,32 @@ class HostViewController: UIViewController {
 
 }
 
+extension HostViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let peerID = matchingServer.connectedClients[indexPath.row]
+        
+        cell.textLabel?.text = peerID.displayName
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return matchingServer.connectedClients.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+}
+
+extension HostViewController : MatchingServerDelegate {
+    func matchingServer(server: MatchingServer, clientsDidChange clients: [MCPeerID]) {
+        self.tableView.reloadData()
+    }
+}

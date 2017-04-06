@@ -9,10 +9,20 @@
 import UIKit
 import MultipeerConnectivity
 
+protocol MatchingClientDelegate {
+    func matchingClient(client:MatchingClient,
+                        hostsDidChange hosts:[MCPeerID])
+    func matchingClient(client:MatchingClient,
+                        shouldReplay inSeconds:(TimeInterval),
+                        withNumber number:(UInt))
+    func matchingClientShouldStartGame(client:MatchingClient)
+    func matchingClientShouldEndGame(client:MatchingClient)
+}
+
 class MatchingClient: MatchingHandler {
     var browser:MCNearbyServiceBrowser!
     var foundHosts = [MCPeerID]()
-    var foundHostsDidChange:(()->())?
+    var delegate:MatchingClientDelegate?
 
     override init() {
         super.init()
@@ -46,7 +56,7 @@ extension MatchingClient : MCNearbyServiceBrowserDelegate {
         DispatchQueue.main.async {
             if (!self.foundHosts.contains(peerID)) {
                 self.foundHosts.append(peerID)
-                self.foundHostsDidChange?()
+                self.delegate?.matchingClient(client: self, hostsDidChange: self.foundHosts)
             }
         }
     }

@@ -15,7 +15,9 @@
 		44BF32211E96219200AA4F2B /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF32201E96219200AA4F2B /* HostViewController.swift */; };
 		44BF32231E96219D00AA4F2B /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF32221E96219D00AA4F2B /* JoinViewController.swift */; };
 		44BF322A1E96282B00AA4F2B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44BF32291E96282B00AA4F2B /* GameKit.framework */; };
-		44BF322E1E965F6100AA4F2B /* MatchingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF322D1E965F6100AA4F2B /* MatchingHelper.swift */; };
+		44BF322E1E965F6100AA4F2B /* MatchingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF322D1E965F6100AA4F2B /* MatchingHandler.swift */; };
+		44BF32321E96736300AA4F2B /* MatchingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF32311E96736300AA4F2B /* MatchingClient.swift */; };
+		44BF32341E96736D00AA4F2B /* MatchingServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF32331E96736D00AA4F2B /* MatchingServer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +31,9 @@
 		44BF32201E96219200AA4F2B /* HostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostViewController.swift; sourceTree = "<group>"; };
 		44BF32221E96219D00AA4F2B /* JoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		44BF32291E96282B00AA4F2B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		44BF322D1E965F6100AA4F2B /* MatchingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingHelper.swift; sourceTree = "<group>"; };
+		44BF322D1E965F6100AA4F2B /* MatchingHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingHandler.swift; sourceTree = "<group>"; };
+		44BF32311E96736300AA4F2B /* MatchingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingClient.swift; sourceTree = "<group>"; };
+		44BF32331E96736D00AA4F2B /* MatchingServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingServer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +73,9 @@
 				44BF32201E96219200AA4F2B /* HostViewController.swift */,
 				44BF32221E96219D00AA4F2B /* JoinViewController.swift */,
 				44BF32121E961F5C00AA4F2B /* Main.storyboard */,
-				44BF322D1E965F6100AA4F2B /* MatchingHelper.swift */,
+				44BF322D1E965F6100AA4F2B /* MatchingHandler.swift */,
+				44BF32311E96736300AA4F2B /* MatchingClient.swift */,
+				44BF32331E96736D00AA4F2B /* MatchingServer.swift */,
 				44BF32151E961F5C00AA4F2B /* Assets.xcassets */,
 				44BF32171E961F5C00AA4F2B /* LaunchScreen.storyboard */,
 				44BF321A1E961F5C00AA4F2B /* Info.plist */,
@@ -159,7 +165,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				44BF32111E961F5C00AA4F2B /* ViewController.swift in Sources */,
-				44BF322E1E965F6100AA4F2B /* MatchingHelper.swift in Sources */,
+				44BF32321E96736300AA4F2B /* MatchingClient.swift in Sources */,
+				44BF322E1E965F6100AA4F2B /* MatchingHandler.swift in Sources */,
+				44BF32341E96736D00AA4F2B /* MatchingServer.swift in Sources */,
 				44BF320F1E961F5C00AA4F2B /* AppDelegate.swift in Sources */,
 				44BF32231E96219D00AA4F2B /* JoinViewController.swift in Sources */,
 				44BF32211E96219200AA4F2B /* HostViewController.swift in Sources */,

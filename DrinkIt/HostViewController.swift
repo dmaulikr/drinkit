@@ -11,7 +11,7 @@ import MultipeerConnectivity
 
 class HostViewController: UIViewController {
     
-    let matchingHelper = MatchingHelper()
+    let matchingServer = MatchingServer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,12 +19,12 @@ class HostViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        matchingHelper.startAdvertising()
+        matchingServer.startAdvertising()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        matchingHelper.stopAdvertising()
+        matchingServer.stopAdvertising()
     }
     
     @IBAction func actionBack(_ sender: Any) {
@@ -32,7 +32,7 @@ class HostViewController: UIViewController {
     }
 
     @IBAction func actionStart(_ sender: Any) {
-        matchingHelper.startGame()
+        matchingServer.startGame()
     }
     /*
     // MARK: - Navigation

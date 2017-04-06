@@ -12,26 +12,26 @@ import MultipeerConnectivity
 class JoinViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    let matchingHelper = MatchingHelper()
+    let matchingClient = MatchingClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
         
-        matchingHelper.foundHostsDidChange = {
+        matchingClient.foundHostsDidChange = {
             self.tableView.reloadData()
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        matchingHelper.startBrowsing()
+        matchingClient.startBrowsing()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        matchingHelper.stopBrowsing()
+        matchingClient.stopBrowsing()
     }
     
     func setupTableView() {
@@ -58,14 +58,14 @@ extension JoinViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let peerID = matchingHelper.foundHosts[indexPath.row]
-        matchingHelper.invitePeer(peerID: peerID)
+        let peerID = matchingClient.foundHosts[indexPath.row]
+        matchingClient.invitePeer(peerID: peerID)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let peerID = matchingHelper.foundHosts[indexPath.row]
+        let peerID = matchingClient.foundHosts[indexPath.row]
 
         cell.textLabel?.text = peerID.displayName
         
@@ -73,7 +73,7 @@ extension JoinViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return matchingHelper.foundHosts.count
+        return matchingClient.foundHosts.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

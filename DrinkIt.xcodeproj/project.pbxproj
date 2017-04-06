@@ -12,6 +12,10 @@
 		44BF32141E961F5C00AA4F2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BF32121E961F5C00AA4F2B /* Main.storyboard */; };
 		44BF32161E961F5C00AA4F2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44BF32151E961F5C00AA4F2B /* Assets.xcassets */; };
 		44BF32191E961F5C00AA4F2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44BF32171E961F5C00AA4F2B /* LaunchScreen.storyboard */; };
+		44BF32211E96219200AA4F2B /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF32201E96219200AA4F2B /* HostViewController.swift */; };
+		44BF32231E96219D00AA4F2B /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF32221E96219D00AA4F2B /* JoinViewController.swift */; };
+		44BF322A1E96282B00AA4F2B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44BF32291E96282B00AA4F2B /* GameKit.framework */; };
+		44BF322E1E965F6100AA4F2B /* MatchingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF322D1E965F6100AA4F2B /* MatchingHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		44BF32151E961F5C00AA4F2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44BF32181E961F5C00AA4F2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44BF321A1E961F5C00AA4F2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44BF32201E96219200AA4F2B /* HostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostViewController.swift; sourceTree = "<group>"; };
+		44BF32221E96219D00AA4F2B /* JoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		44BF32291E96282B00AA4F2B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		44BF322D1E965F6100AA4F2B /* MatchingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44BF322A1E96282B00AA4F2B /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +49,7 @@
 			children = (
 				44BF320D1E961F5C00AA4F2B /* DrinkIt */,
 				44BF320C1E961F5C00AA4F2B /* Products */,
+				44BF32281E96282B00AA4F2B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +66,23 @@
 			children = (
 				44BF320E1E961F5C00AA4F2B /* AppDelegate.swift */,
 				44BF32101E961F5C00AA4F2B /* ViewController.swift */,
+				44BF32201E96219200AA4F2B /* HostViewController.swift */,
+				44BF32221E96219D00AA4F2B /* JoinViewController.swift */,
 				44BF32121E961F5C00AA4F2B /* Main.storyboard */,
+				44BF322D1E965F6100AA4F2B /* MatchingHelper.swift */,
 				44BF32151E961F5C00AA4F2B /* Assets.xcassets */,
 				44BF32171E961F5C00AA4F2B /* LaunchScreen.storyboard */,
 				44BF321A1E961F5C00AA4F2B /* Info.plist */,
 			);
 			path = DrinkIt;
+			sourceTree = "<group>";
+		};
+		44BF32281E96282B00AA4F2B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				44BF32291E96282B00AA4F2B /* GameKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +159,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				44BF32111E961F5C00AA4F2B /* ViewController.swift in Sources */,
+				44BF322E1E965F6100AA4F2B /* MatchingHelper.swift in Sources */,
 				44BF320F1E961F5C00AA4F2B /* AppDelegate.swift in Sources */,
+				44BF32231E96219D00AA4F2B /* JoinViewController.swift in Sources */,
+				44BF32211E96219200AA4F2B /* HostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +324,7 @@
 				44BF321F1E961F5C00AA4F2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

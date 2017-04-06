@@ -10,5 +10,6 @@ import UIKit
 
 enum MatchingMessage:String {
     case startGame = "startGame"
+    case startDealing = "startDealing"
 }
 

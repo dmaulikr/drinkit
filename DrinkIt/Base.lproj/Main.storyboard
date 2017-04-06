@@ -199,6 +199,11 @@
                                     <action selector="actionBack:" destination="ybi-Hr-1h4" eventType="touchUpInside" id="pC7-Ei-IYy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjF-xw-YVK">
+                                <rect key="frame" x="11" y="617" width="348" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start Dealing"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -209,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kje-Jh-TRM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2566" y="-71"/>
+            <point key="canvasLocation" x="2565.5999999999999" y="-71.514242878560722"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

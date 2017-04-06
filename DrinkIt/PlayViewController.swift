@@ -21,6 +21,9 @@ class PlayViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func actionBack(_ sender: Any) {
+        let _ = self.navigationController?.popViewController(animated: true)
+    }
 
     /*
     // MARK: - Navigation

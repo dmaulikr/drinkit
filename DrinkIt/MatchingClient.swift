@@ -45,6 +45,24 @@ class MatchingClient: MatchingHandler {
         browser.invitePeer(peerID, to: session, withContext: nil, timeout: 30)
     }
 
+    override func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        
+        let message = String(data: data, encoding: .utf8)
+
+        if let message = message {
+            
+            DispatchQueue.main.async {
+                switch message {
+                case MatchingMessage.startGame.rawValue:
+                    self.delegate?.matchingClientShouldStartGame(client: self)
+                    break
+                default:
+                    break
+                }
+            }
+        }
+        
+    }
 }
 
 extension MatchingClient : MCNearbyServiceBrowserDelegate {

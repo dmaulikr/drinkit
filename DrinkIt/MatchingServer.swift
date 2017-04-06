@@ -15,7 +15,7 @@ protocol MatchingServerDelegate {
 }
 
 class MatchingServer: MatchingHandler {
-
+    
     var advertiser:MCNearbyServiceAdvertiser!
     var connectedClients = [MCPeerID]()
     var delegate:MatchingServerDelegate?
@@ -39,7 +39,7 @@ class MatchingServer: MatchingHandler {
     }
     
     func startGame() {
-        session.sendMessage(message: "Start Game", peers: connectedClients)
+        session.sendMessage(message: MatchingMessage.startGame.rawValue, peers: connectedClients)
     }
 }
 

@@ -62,6 +62,7 @@ class PlayViewController: UIViewController {
         if let matchingServer = matchingServer {
             card = deck.randomDraw().toString()
             matchingServer.startDealing(deck: deck)
+            dealingButton.isHidden = true
             startCountDown()
         }
     }
@@ -81,6 +82,7 @@ class PlayViewController: UIViewController {
         if timePassed > 3.5 {
             countDownTimer = nil
             countDonwLabel.isHidden = true
+            dealingButton.isHidden = false
             if let card = card {
                 cardImageView.image = UIImage(named: card)
             }

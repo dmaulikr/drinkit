@@ -14,6 +14,7 @@ class PlayViewController: UIViewController {
     @IBOutlet weak var dealingButton: UIButton!
     @IBOutlet weak var countDonwLabel: UILabel!
     @IBOutlet weak var cardImageView: UIImageView!
+    @IBOutlet weak var backButton: UIButton!
 
     var deck = Deck()
     var card:String?
@@ -44,6 +45,9 @@ class PlayViewController: UIViewController {
         super.viewDidLoad()
         
         dealingButton.isHidden = matchingClient != nil
+        dealingButton.di_applyDefaultButtonStyle()
+        backButton.di_applyDefaultButtonStyle()
+        countDonwLabel.font = UIFont.di_actionManFont(size: 72)
     }
     
     override func viewDidAppear(_ animated: Bool) {

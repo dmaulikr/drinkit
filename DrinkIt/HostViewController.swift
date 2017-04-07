@@ -11,6 +11,9 @@ import MultipeerConnectivity
 
 class HostViewController: UIViewController {
     
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     let matchingServer = MatchingServer()
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,6 +21,10 @@ class HostViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupMatchingServer()
+        
+        titleLabel.di_applyDefaultTitleLabelStyle()
+        startButton.di_applyDefaultButtonStyle()
+        backButton.di_applyDefaultButtonStyle()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,10 +72,11 @@ extension HostViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
+        cell.backgroundColor = UIColor.clear
         let peerID = matchingServer.connectedClients[indexPath.row]
         
-        cell.textLabel?.text = peerID.displayName
+        cell.textLabel?.text = "\(peerID.displayName)"
+        cell.textLabel?.di_applyDefaultTitleLabelStyle()
         
         return cell
     }

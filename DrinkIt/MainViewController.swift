@@ -8,18 +8,21 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
+    @IBOutlet weak var hostGameButton: UIButton!
+    @IBOutlet weak var joinGameButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        setupButtons()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func setupButtons() {
+        hostGameButton.di_applyDefaultButtonStyle()
+        joinGameButton.di_applyDefaultButtonStyle()
     }
-
 
 }
 

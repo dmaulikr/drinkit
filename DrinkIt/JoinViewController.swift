@@ -11,6 +11,8 @@ import MultipeerConnectivity
 
 class JoinViewController: UIViewController {
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     let matchingClient = MatchingClient()
     
@@ -19,6 +21,9 @@ class JoinViewController: UIViewController {
         
         setupTableView()
         setupMatchingClient()
+        
+        backButton.di_applyDefaultButtonStyle()
+        titleLabel.di_applyDefaultTitleLabelStyle()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,10 +67,11 @@ extension JoinViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
+        cell.backgroundColor = UIColor.clear
         let peerID = matchingClient.foundHosts[indexPath.row]
 
         cell.textLabel?.text = peerID.displayName
+        cell.textLabel?.di_applyDefaultTitleLabelStyle()
         
         return cell
     }

@@ -74,6 +74,7 @@ extension HostViewController : UITableViewDelegate, UITableViewDataSource {
         
         cell.textLabel?.text = "\(peerID.displayName)"
         cell.textLabel?.di_applyDefaultTitleLabelStyle()
+        cell.di_applyDefaultSelectionColor()
         
         return cell
     }

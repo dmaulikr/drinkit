@@ -20,6 +20,9 @@
 		44BF32341E96736D00AA4F2B /* MatchingServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF32331E96736D00AA4F2B /* MatchingServer.swift */; };
 		44BF32361E968B1100AA4F2B /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF32351E968B1100AA4F2B /* PlayViewController.swift */; };
 		44BF32381E9691C600AA4F2B /* MatchingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF32371E9691C600AA4F2B /* MatchingMessage.swift */; };
+		44BF323A1E96A14000AA4F2B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF32391E96A14000AA4F2B /* Card.swift */; };
+		44BF323C1E96A15000AA4F2B /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF323B1E96A15000AA4F2B /* Deck.swift */; };
+		44BF323E1E96A74700AA4F2B /* CardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BF323D1E96A74700AA4F2B /* CardImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		44BF32331E96736D00AA4F2B /* MatchingServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingServer.swift; sourceTree = "<group>"; };
 		44BF32351E968B1100AA4F2B /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		44BF32371E9691C600AA4F2B /* MatchingMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingMessage.swift; sourceTree = "<group>"; };
+		44BF32391E96A14000AA4F2B /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		44BF323B1E96A15000AA4F2B /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		44BF323D1E96A74700AA4F2B /* CardImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,9 +88,12 @@
 				44BF32311E96736300AA4F2B /* MatchingClient.swift */,
 				44BF32331E96736D00AA4F2B /* MatchingServer.swift */,
 				44BF32371E9691C600AA4F2B /* MatchingMessage.swift */,
+				44BF323D1E96A74700AA4F2B /* CardImageView.swift */,
 				44BF32151E961F5C00AA4F2B /* Assets.xcassets */,
 				44BF32171E961F5C00AA4F2B /* LaunchScreen.storyboard */,
 				44BF321A1E961F5C00AA4F2B /* Info.plist */,
+				44BF32391E96A14000AA4F2B /* Card.swift */,
+				44BF323B1E96A15000AA4F2B /* Deck.swift */,
 			);
 			path = DrinkIt;
 			sourceTree = "<group>";
@@ -177,7 +186,10 @@
 				44BF32341E96736D00AA4F2B /* MatchingServer.swift in Sources */,
 				44BF320F1E961F5C00AA4F2B /* AppDelegate.swift in Sources */,
 				44BF32381E9691C600AA4F2B /* MatchingMessage.swift in Sources */,
+				44BF323A1E96A14000AA4F2B /* Card.swift in Sources */,
 				44BF32231E96219D00AA4F2B /* JoinViewController.swift in Sources */,
+				44BF323C1E96A15000AA4F2B /* Deck.swift in Sources */,
+				44BF323E1E96A74700AA4F2B /* CardImageView.swift in Sources */,
 				44BF32211E96219200AA4F2B /* HostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

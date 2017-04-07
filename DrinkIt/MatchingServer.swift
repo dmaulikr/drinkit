@@ -41,6 +41,18 @@ class MatchingServer: MatchingHandler {
     func startGame() {
         session.sendMessage(message: MatchingMessage.startGame.rawValue, peers: connectedClients)
     }
+    
+    func startDealing(deck:Deck) {
+        
+        connectedClients.forEach { (peerID) in
+            let card = deck.randomDraw()
+            
+            let message = "\(MatchingMessage.startDealing.rawValue):\(card.toString())"
+            
+            session.sendMessage(message: message, peers: [peerID])
+        }
+    }
+
 }
 
 extension MatchingServer: MCNearbyServiceAdvertiserDelegate {

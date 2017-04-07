@@ -7,24 +7,86 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class PlayViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBOutlet weak var dealingButton: UIButton!
+    @IBOutlet weak var countDonwLabel: UILabel!
+    @IBOutlet weak var cardImageView: UIImageView!
 
-        // Do any additional setup after loading the view.
+    var deck = Deck()
+    var card:String?
+    
+    var matchingServer:MatchingServer? {
+        didSet {
+            if let matchingServer = matchingServer {
+                matchingServer.delegate = self
+            }
+        }
+    }
+    
+    var matchingClient:MatchingClient? {
+        didSet {
+            if let matchingClient = matchingClient {
+                matchingClient.delegate = self
+            }
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    var countDownTimer:Timer? {
+        willSet {
+            countDownTimer?.invalidate()
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        dealingButton.isHidden = matchingClient != nil
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     @IBAction func actionBack(_ sender: Any) {
         let _ = self.navigationController?.popViewController(animated: true)
     }
 
+    @IBAction func actionDealing(_ sender: Any) {
+        if let matchingServer = matchingServer {
+            card = deck.randomDraw().toString()
+            matchingServer.startDealing(deck: deck)
+            startCountDown()
+        }
+    }
+    
+    func startCountDown() {
+        cardImageView.image = UIImage(named: "Back")
+        countDownTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(countDown), userInfo: NSDate(), repeats: true)
+    }
+    
+    func countDown(timer:Timer) {
+        guard let _ = countDownTimer, let date = countDownTimer?.userInfo as? Date else {
+            return
+        }
+
+        let timePassed = -date.timeIntervalSinceNow
+
+        if timePassed > 3.5 {
+            countDownTimer = nil
+            countDonwLabel.isHidden = true
+            if let card = card {
+                cardImageView.image = UIImage(named: card)
+            }
+        } else {
+            countDonwLabel.isHidden = false
+            let time = max(0, UInt( ceil( 3.0 - timePassed ) ))
+            countDonwLabel.text = "\(time)"
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -35,4 +97,23 @@ class PlayViewController: UIViewController {
     }
     */
 
+}
+
+extension PlayViewController : MatchingServerDelegate {
+    func matchingServer(server: MatchingServer, clientsDidChange clients: [MCPeerID]) {
+    }
+}
+
+extension PlayViewController : MatchingClientDelegate {
+    func matchingClient(client:MatchingClient,
+                        hostsDidChange hosts:[MCPeerID]) {
+    }
+    func matchingClient(client:MatchingClient, didGetCard card:String) {
+        self.card = card
+        startCountDown()
+    }
+    func matchingClientShouldStartGame(client:MatchingClient) {
+    }
+    func matchingClientShouldEndGame(client:MatchingClient) {
+    }
 }

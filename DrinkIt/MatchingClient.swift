@@ -12,9 +12,7 @@ import MultipeerConnectivity
 protocol MatchingClientDelegate {
     func matchingClient(client:MatchingClient,
                         hostsDidChange hosts:[MCPeerID])
-    func matchingClient(client:MatchingClient,
-                        shouldReplay inSeconds:(TimeInterval),
-                        withNumber number:(UInt))
+    func matchingClient(client:MatchingClient, didGetCard card:String)
     func matchingClientShouldStartGame(client:MatchingClient)
     func matchingClientShouldEndGame(client:MatchingClient)
 }
@@ -47,18 +45,21 @@ class MatchingClient: MatchingHandler {
 
     override func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
-        let message = String(data: data, encoding: .utf8)
-
-        if let message = message {
+        guard let message = String(data: data, encoding: .utf8) else {
+            return
+        }
+        print("client did receive message \(message)")
+        
+        DispatchQueue.main.async {
             
-            DispatchQueue.main.async {
-                switch message {
-                case MatchingMessage.startGame.rawValue:
-                    self.delegate?.matchingClientShouldStartGame(client: self)
-                    break
-                default:
-                    break
+            if (message == MatchingMessage.startGame.rawValue) {
+                self.delegate?.matchingClientShouldStartGame(client: self)
+            } else if (message.contains(MatchingMessage.startDealing.rawValue)) {
+                guard let card = message.components(separatedBy: ":").last else {
+                    return
                 }
+                print("card \(card)")
+                self.delegate?.matchingClient(client: self, didGetCard: card)
             }
         }
         

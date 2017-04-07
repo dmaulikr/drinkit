@@ -44,15 +44,12 @@ class JoinViewController: UIViewController {
     @IBAction func actionBack(_ sender: Any) {
         let _ = self.navigationController?.popViewController(animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let playViewController = segue.destination as? PlayViewController {
+            playViewController.matchingClient = matchingClient
+        }
     }
-    */
 }
 
 extension JoinViewController : UITableViewDelegate, UITableViewDataSource {
@@ -87,10 +84,7 @@ extension JoinViewController : MatchingClientDelegate {
                         hostsDidChange hosts:[MCPeerID]) {
         tableView.reloadData()
     }
-    func matchingClient(client:MatchingClient,
-                        shouldReplay inSeconds:(TimeInterval),
-                        withNumber number:(UInt)) {
-        
+    func matchingClient(client:MatchingClient, didGetCard card:String) {
     }
     func matchingClientShouldStartGame(client:MatchingClient) {
         performSegue(withIdentifier: "Play", sender: nil)

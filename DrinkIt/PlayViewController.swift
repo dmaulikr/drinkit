@@ -88,7 +88,10 @@ class PlayViewController: UIViewController {
         if timePassed > 3.5 {
             countDownTimer = nil
             countDonwLabel.isHidden = true
-            dealingButton.isHidden = false
+            
+            if matchingServer != nil {
+                dealingButton.isHidden = false
+            }
             if let card = card {
                 cardImageView.image = UIImage(named: card)
             }

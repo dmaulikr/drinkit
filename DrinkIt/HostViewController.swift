@@ -14,13 +14,19 @@ class HostViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
-    let matchingServer = MatchingServer()
     @IBOutlet weak var tableView: UITableView!
+
+    let matchingServer = MatchingServer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
-        setupMatchingServer()
+        setupUI()
+    }
+    
+    func setupUI() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         titleLabel.di_applyDefaultTitleLabelStyle()
         startButton.di_applyDefaultButtonStyle()
@@ -29,6 +35,7 @@ class HostViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        matchingServer.delegate = self
         matchingServer.startAdvertising()
     }
     
@@ -47,16 +54,6 @@ class HostViewController: UIViewController {
         performSegue(withIdentifier: "Play", sender: nil)
     }
     
-    func setupMatchingServer() {
-        matchingServer.delegate = self
-    }
-    
-    func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let playViewController = segue.destination as? PlayViewController {
             playViewController.matchingServer = matchingServer

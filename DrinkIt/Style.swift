@@ -37,3 +37,42 @@ extension UITableViewCell {
         self.selectedBackgroundView = bgColorView
     }
 }
+
+extension UIViewController {
+    func showAlert(title:String?, message:String?, completion:(()->())?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel) { action in
+            if let completion = completion {
+                completion()
+            }
+        }
+        
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlert(title:String?, message:String?, ok:(()->())?, cancel:(()->())?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "NO", style: .cancel) { action in
+            if let cancel = cancel {
+                cancel()
+            }
+        }
+        
+        alertController.addAction(cancelAction)
+        
+        let yesAction = UIAlertAction(title: "YES", style: .cancel) { action in
+            if let ok = ok {
+                ok()
+            }
+        }
+
+        alertController.addAction(yesAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
+}

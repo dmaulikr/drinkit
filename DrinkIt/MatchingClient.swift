@@ -15,6 +15,7 @@ import MultipeerConnectivity
     @objc optional func matchingClient(client:MatchingClient, didGetCard card:String)
     @objc optional func matchingClientShouldStartGame(client:MatchingClient)
     @objc optional func matchingClientShouldEndGame(client:MatchingClient)
+    @objc optional func matchingClient(client:MatchingClient, didChangeState state:MCSessionState)
 }
 
 class MatchingClient: MatchingHandler {
@@ -60,9 +61,16 @@ class MatchingClient: MatchingHandler {
                 }
                 print("card \(card)")
                 self.delegate?.matchingClient?(client: self, didGetCard: card)
+            } else if (message == MatchingMessage.endGame.rawValue) {
+                self.delegate?.matchingClientShouldEndGame?(client: self)
             }
         }
-        
+    }
+    
+    override func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        DispatchQueue.main.async {
+            self.delegate?.matchingClient?(client: self, didChangeState: state)
+        }
     }
 }
 

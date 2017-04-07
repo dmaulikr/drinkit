@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import MBProgressHUD
 
 class JoinViewController: UIViewController {
     
@@ -15,6 +16,8 @@ class JoinViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     let matchingClient = MatchingClient()
+    
+    var hud:MBProgressHUD?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +64,10 @@ extension JoinViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "Connecting..."
+        self.hud = hud
+
         let peerID = matchingClient.foundHosts[indexPath.row]
         matchingClient.invitePeer(peerID: peerID)
     }
@@ -97,6 +104,20 @@ extension JoinViewController : MatchingClientDelegate {
         performSegue(withIdentifier: "Play", sender: nil)
     }
     func matchingClientShouldEndGame(client:MatchingClient) {
+    }
+    
+    func matchingClient(client: MatchingClient, didChangeState state: MCSessionState) {
         
+        guard let hud = hud else { return }
+        
+        if state == .connected {
+            hud.label.text = "Connection Success!"
+            hud.detailsLabel.text = "Wating for Start..."
+        } else if state == .notConnected {
+            hud.hide(animated: true)
+            showAlert(title: "Connection Fail...", message: nil, completion: { 
+               let _ = self.navigationController?.popViewController(animated: true)
+            })
+        }
     }
 }

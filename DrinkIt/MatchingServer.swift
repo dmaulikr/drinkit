@@ -42,6 +42,10 @@ class MatchingServer: MatchingHandler {
         session.sendMessage(message: MatchingMessage.startGame.rawValue, peers: connectedClients)
     }
     
+    func endGame() {
+        session.sendMessage(message: MatchingMessage.endGame.rawValue, peers: connectedClients)
+    }
+    
     func startDealing(deck:Deck) {
         
         connectedClients.forEach { (peerID) in

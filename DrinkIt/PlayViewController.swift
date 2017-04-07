@@ -61,7 +61,7 @@ class PlayViewController: UIViewController {
     }
     
     @IBAction func actionBack(_ sender: Any) {
-        let _ = self.navigationController?.popViewController(animated: true)
+        let _ = self.navigationController?.popToRootViewController(animated: true)
     }
 
     @IBAction func actionDealing(_ sender: Any) {

@@ -20,7 +20,8 @@ class PlayViewController: UIViewController {
     var deck = Deck()
     var card:String?
     var hud:MBProgressHUD?
-    var isReconnceting:Bool = false
+    var isReconnceting = false
+    var isOver = false
     
     var matchingServer:MatchingServer? {
         didSet {
@@ -50,7 +51,7 @@ class PlayViewController: UIViewController {
         dealingButton.isHidden = matchingClient != nil
         dealingButton.di_applyDefaultButtonStyle()
         backButton.di_applyDefaultButtonStyle()
-        countDonwLabel.font = UIFont.di_actionManFont(size: 72)
+        countDonwLabel.font = UIFont.di_actionManFont(size: 100)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -125,42 +126,57 @@ class PlayViewController: UIViewController {
 }
 
 extension PlayViewController : MatchingClientDelegate {
-    func matchingClient(client:MatchingClient,
-                        hostsDidChange hosts:[MCPeerID]) {
-    }
+    
     func matchingClient(client:MatchingClient, didGetCard card:String) {
         self.card = card
         startCountDown()
     }
-    func matchingClientShouldStartGame(client:MatchingClient) {
-    }
+    
     func matchingClientShouldEndGame(client:MatchingClient) {
+        isOver = true
         showAlert(title: "Game Over", message: "Host leaves the game!") { 
             let _ = self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
+    func reconnect() {
+        guard let client = matchingClient else {
+            return
+        }
+        
+        isReconnceting = true
+        
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "Connecting..."
+        self.hud = hud
+        
+        client.reinviteLastPeer()
+    }
+    
     func matchingClient(client: MatchingClient, didChangeState state: MCSessionState) {
         
-//        if state == .connected && self.isReconnceting {
-//            guard let hud = hud else { return }
-//            hud.label.text = "Connection Success!"
-//            hud.hide(animated: true, afterDelay: 0.5)
-//            isReconnceting = false
-//            
-//        } else if state == .notConnected {
-//        
-//            showAlert(title: "Disconnected", message: "Do you want to reconnect?", ok: { 
-//                self.isReconnceting = true
-//                
-//                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-//                hud.label.text = "Connecting..."
-//                self.hud = hud
-//    
-//            }, cancel: { 
-//                let _ = self.navigationController?.popViewController(animated: true)
-//            })
-//        }
+        if isOver {
+            return
+        }
+        
+        if state == .connected && self.isReconnceting {
+            guard let hud = hud else { return }
+            hud.label.text = "Connection Success!"
+            hud.hide(animated: true, afterDelay: 0.5)
+            isReconnceting = false
+            
+        } else if state == .notConnected {
+            
+            let title = isReconnceting ? "Reconnect Fails" : "Disconnected"
+            let message = isReconnceting ? "Do you want to retry?" : "Do you want to reconnect?"
+            
+            showAlert(title: title, message: message, ok: {
+                self.reconnect()
+            }, cancel: {
+                let _ = self.navigationController?.popToRootViewController(animated: true)
+            })
+            
+        }
     }
 
     

@@ -23,6 +23,8 @@ class MatchingClient: MatchingHandler {
     var foundHosts = [MCPeerID]()
     var delegate:MatchingClientDelegate?
 
+    var lastInvitedPeer:MCPeerID?
+    
     override init() {
         super.init()
 
@@ -42,6 +44,13 @@ class MatchingClient: MatchingHandler {
 
     func invitePeer(peerID:MCPeerID) {
         browser.invitePeer(peerID, to: session, withContext: nil, timeout: 30)
+        lastInvitedPeer = peerID
+    }
+    
+    func reinviteLastPeer() {
+        if let peerID = lastInvitedPeer {
+            invitePeer(peerID: peerID)
+        }
     }
 
     override func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {

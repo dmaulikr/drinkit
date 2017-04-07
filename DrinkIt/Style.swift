@@ -64,7 +64,7 @@ extension UIViewController {
         
         alertController.addAction(cancelAction)
         
-        let yesAction = UIAlertAction(title: "YES", style: .cancel) { action in
+        let yesAction = UIAlertAction(title: "YES", style: .default) { action in
             if let ok = ok {
                 ok()
             }

@@ -9,12 +9,12 @@
 import UIKit
 import MultipeerConnectivity
 
-protocol MatchingClientDelegate {
-    func matchingClient(client:MatchingClient,
+@objc protocol MatchingClientDelegate: class {
+    @objc optional func matchingClient(client:MatchingClient,
                         hostsDidChange hosts:[MCPeerID])
-    func matchingClient(client:MatchingClient, didGetCard card:String)
-    func matchingClientShouldStartGame(client:MatchingClient)
-    func matchingClientShouldEndGame(client:MatchingClient)
+    @objc optional func matchingClient(client:MatchingClient, didGetCard card:String)
+    @objc optional func matchingClientShouldStartGame(client:MatchingClient)
+    @objc optional func matchingClientShouldEndGame(client:MatchingClient)
 }
 
 class MatchingClient: MatchingHandler {
@@ -53,13 +53,13 @@ class MatchingClient: MatchingHandler {
         DispatchQueue.main.async {
             
             if (message == MatchingMessage.startGame.rawValue) {
-                self.delegate?.matchingClientShouldStartGame(client: self)
+                self.delegate?.matchingClientShouldStartGame?(client: self)
             } else if (message.contains(MatchingMessage.startDealing.rawValue)) {
                 guard let card = message.components(separatedBy: ":").last else {
                     return
                 }
                 print("card \(card)")
-                self.delegate?.matchingClient(client: self, didGetCard: card)
+                self.delegate?.matchingClient?(client: self, didGetCard: card)
             }
         }
         
@@ -75,7 +75,7 @@ extension MatchingClient : MCNearbyServiceBrowserDelegate {
         DispatchQueue.main.async {
             if (!self.foundHosts.contains(peerID)) {
                 self.foundHosts.append(peerID)
-                self.delegate?.matchingClient(client: self, hostsDidChange: self.foundHosts)
+                self.delegate?.matchingClient?(client: self, hostsDidChange: self.foundHosts)
             }
         }
     }

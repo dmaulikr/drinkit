@@ -115,8 +115,7 @@ extension JoinViewController : MatchingClientDelegate {
             hud.detailsLabel.text = "Wating for Start..."
         } else if state == .notConnected {
             hud.hide(animated: true)
-            showAlert(title: "Connection Fail...", message: nil, completion: { 
-               let _ = self.navigationController?.popViewController(animated: true)
+            showAlert(title: "Connection Fails...", message: nil, completion: { 
             })
         }
     }

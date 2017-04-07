@@ -53,6 +53,19 @@ class MatchingServer: MatchingHandler {
         }
     }
 
+    override func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        
+        DispatchQueue.main.async {
+            if state == .connected {
+                self.connectedClients.append(peerID)
+                self.delegate?.matchingServer(server: self, clientsDidChange: self.connectedClients)
+            } else if (state == .notConnected) {
+                guard let index = self.connectedClients.index(of: peerID) else { return }
+                self.connectedClients.remove(at: index)
+                self.delegate?.matchingServer(server: self, clientsDidChange: self.connectedClients)
+            }
+        }
+    }
 }
 
 extension MatchingServer: MCNearbyServiceAdvertiserDelegate {
@@ -62,12 +75,6 @@ extension MatchingServer: MCNearbyServiceAdvertiserDelegate {
                     invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         
         invitationHandler(true, session)
-        
-        connectedClients.append(peerID)
-        
-        DispatchQueue.main.async {
-            self.delegate?.matchingServer(server: self, clientsDidChange: self.connectedClients)
-        }
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser,

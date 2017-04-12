@@ -44,6 +44,10 @@ class Card: NSObject {
     }
     
     func toString() -> String {
+        if (self.number == 0) {
+            return "Joker"
+        }
+        
         return "\(suit.toString()) \(number.toCardString())"
     }
 }

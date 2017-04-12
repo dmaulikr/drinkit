@@ -155,28 +155,28 @@ extension PlayViewController : MatchingClientDelegate {
     
     func matchingClient(client: MatchingClient, didChangeState state: MCSessionState) {
         
-        if isOver {
-            return
-        }
-        
-        if state == .connected && self.isReconnceting {
-            guard let hud = hud else { return }
-            hud.label.text = "Connection Success!"
-            hud.hide(animated: true, afterDelay: 0.5)
-            isReconnceting = false
-            
-        } else if state == .notConnected {
-            
-            let title = isReconnceting ? "Reconnect Fails" : "Disconnected"
-            let message = isReconnceting ? "Do you want to retry?" : "Do you want to reconnect?"
-            
-            showAlert(title: title, message: message, ok: {
-                self.reconnect()
-            }, cancel: {
-                let _ = self.navigationController?.popToRootViewController(animated: true)
-            })
-            
-        }
+//        if isOver {
+//            return
+//        }
+//        
+//        if state == .connected && self.isReconnceting {
+//            guard let hud = hud else { return }
+//            hud.label.text = "Connection Success!"
+//            hud.hide(animated: true, afterDelay: 0.5)
+//            isReconnceting = false
+//            
+//        } else if state == .notConnected {
+//            
+//            let title = isReconnceting ? "Reconnect Fails" : "Disconnected"
+//            let message = isReconnceting ? "Do you want to retry?" : "Do you want to reconnect?"
+//            
+//            showAlert(title: title, message: message, ok: {
+//                self.reconnect()
+//            }, cancel: {
+//                let _ = self.navigationController?.popToRootViewController(animated: true)
+//            })
+//            
+//        }
     }
 
     

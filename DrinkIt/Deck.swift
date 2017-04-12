@@ -28,7 +28,10 @@ class Deck: NSObject {
             }
         }
         
-        assert(cards.count == 52)
+        let joker1 = Card(suit: .spades, number: 0)
+        let joker2 = Card(suit: .spades, number: 0)
+        cards.append(joker1)
+        cards.append(joker2)
     }
     
     func randomDraw() -> Card {
